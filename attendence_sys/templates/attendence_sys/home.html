@@ -1,0 +1,267 @@
+{% extends 'attendence_sys/main.html' %}
+
+{% block content %}
+<div class="container py-5">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    <div class="row">
+        <!-- Take Attendance Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-camera mr-2"></i>Take Attendance</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'takeAttendence' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="font-weight-bold">Select Branch</label>
+                            <select name='branch' class="form-control custom-select">
+                                <option value="CSE">Computer Science</option>
+                                <option value="IT">Information Technology</option>
+                                <option value="ECE">Electronics</option>
+                                <option value="EEE">Electrical</option>
+                                <option value="MECH">Mechanical</option>
+                                <option value="CHEM">Chemical</option>
+                                <option value="CIVIL">Civil</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Select Year</label>
+                            <select name='year' class="form-control custom-select">
+                                <option value="1">First Year</option>
+                                <option value="2">Second Year</option>
+                                <option value="3">Third Year</option>
+                                <option value="4">Fourth Year</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Select Section</label>
+                            <select name='section' class="form-control custom-select">
+                                <option value="A">Section A</option>
+                                <option value="B">Section B</option>
+                                <option value="C">Section C</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Select Period</label>
+                            <select name='period' class="form-control custom-select">
+                                {% for i in "1234567" %}
+                                    <option value="{{ i }}">Period {{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-camera mr-2"></i>Start Attendance
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generate Report Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="fas fa-file-excel mr-2"></i>Generate Attendance Report</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'generate_report' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="font-weight-bold">Select Branch</label>
+                            <select name='branch' class="form-control custom-select">
+                                <option value="CSE">Computer Science</option>
+                                <option value="IT">Information Technology</option>
+                                <option value="ECE">Electronics</option>
+                                <option value="EEE">Electrical</option>
+                                <option value="MECH">Mechanical</option>
+                                <option value="CHEM">Chemical</option>
+                                <option value="CIVIL">Civil</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Select Year</label>
+                            <select name='year' class="form-control custom-select">
+                                <option value="1">First Year</option>
+                                <option value="2">Second Year</option>
+                                <option value="3">Third Year</option>
+                                <option value="4">Fourth Year</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Select Section</label>
+                            <select name='section' class="form-control custom-select">
+                                <option value="A">Section A</option>
+                                <option value="B">Section B</option>
+                                <option value="C">Section C</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">
+                            <i class="fas fa-download mr-2"></i>Download Report
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Student Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="fas fa-user-plus mr-2"></i>Add New Student</h4>
+                </div>
+                <div class="card-body">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">First Name</label>
+                                    {{ studentForm.firstname }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Last Name</label>
+                                    {{ studentForm.lastname }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Registration ID</label>
+                            {{ studentForm.registration_id }}
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Branch</label>
+                                    {{ studentForm.branch }}
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Year</label>
+                                    {{ studentForm.year }}
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Section</label>
+                                    {{ studentForm.section }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Profile Picture</label>
+                            {{ studentForm.profile_pic }}
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">
+                            <i class="fas fa-user-plus mr-2"></i>Add Student
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Update Student Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0"><i class="fas fa-user-edit mr-2"></i>Update Student Details</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'updateStudentRedirect' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="font-weight-bold">Registration ID</label>
+                            <input name="reg_id" type="text" class="form-control" placeholder="Enter Registration ID">
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Select Branch</label>
+                            <select name='branch' class="form-control custom-select">
+                                <option value="CSE">Computer Science</option>
+                                <option value="IT">Information Technology</option>
+                                <option value="ECE">Electronics</option>
+                                <option value="EEE">Electrical</option>
+                                <option value="MECH">Mechanical</option>
+                                <option value="CHEM">Chemical</option>
+                                <option value="CIVIL">Civil</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-info btn-block">
+                            <i class="fas fa-user-edit mr-2"></i>Update Student
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Attendance Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-warning text-white">
+                    <h4 class="mb-0"><i class="fas fa-search mr-2"></i>Search Attendance</h4>
+                </div>
+                <div class="card-body d-flex align-items-center justify-content-center">
+                    <a href="{% url 'searchattendence' %}" class="btn btn-warning btn-lg">
+                        <i class="fas fa-search mr-2"></i>Search Attendance Records
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: none;
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .card-header {
+        border-bottom: none;
+        padding: 1rem;
+    }
+    
+    .form-control {
+        border-radius: 0.25rem;
+        border: 1px solid #ced4da;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .form-control:focus {
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    
+    .btn {
+        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .alert {
+        border-radius: 0.25rem;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+</style>
+{% endblock %}
