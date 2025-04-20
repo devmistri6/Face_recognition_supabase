@@ -6,7 +6,11 @@
 		max-width: 200px;
 		max-height:200px;
 		margin: 0 auto;
-		border-radius: 50%;
+		border-radius: 20px;
+	}
+	.btn{
+		background-color: #003785;
+		color: white !important;
 	}
 </style>
 
@@ -14,7 +18,7 @@
 <div class="row">
 	<div class="col-md-3">
 		<div class="card card-body">
-			<a class="btn btn-warning" href="{% url 'home' %}"> &#8592; Back to Home</a>
+			<a class="btn " href="{% url 'home' %}"> &#8592; Back to Home</a>
 			<hr>
 			<h3 style="text-align: center">Faculty Profile Pic</h3>
 			<hr>
@@ -32,7 +36,7 @@
 				{% csrf_token %}
 				{{form.as_p}}
 		
-			<input class="btn btn-primary" type="submit" name="Update Information">
+			<input class="btn " type="submit" name="Update Information">
 			</form>
 		</div>
 	</div>

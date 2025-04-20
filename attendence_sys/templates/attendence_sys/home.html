@@ -15,7 +15,7 @@
         <!-- Take Attendance Card -->
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm h-100">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header  text-white">
                     <h4 class="mb-0"><i class="fas fa-camera mr-2"></i>Take Attendance</h4>
                 </div>
                 <div class="card-body">
@@ -58,7 +58,7 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">
+                        <button type="submit" class="btn  btn-block">
                             <i class="fas fa-camera mr-2"></i>Start Attendance
                         </button>
                     </form>
@@ -69,7 +69,7 @@
         <!-- Generate Report Card -->
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm h-100">
-                <div class="card-header bg-success text-white">
+                <div class="card-header  text-white">
                     <h4 class="mb-0"><i class="fas fa-file-excel mr-2"></i>Generate Attendance Report</h4>
                 </div>
                 <div class="card-body">
@@ -104,7 +104,7 @@
                                 <option value="C">Section C</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-success btn-block">
+                        <button type="submit" class="btn  btn-block">
                             <i class="fas fa-download mr-2"></i>Download Report
                         </button>
                     </form>
@@ -115,7 +115,7 @@
         <!-- Add Student Card -->
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm h-100">
-                <div class="card-header bg-success text-white">
+                <div class="card-header  text-white">
                     <h4 class="mb-0"><i class="fas fa-user-plus mr-2"></i>Add New Student</h4>
                 </div>
                 <div class="card-body">
@@ -163,7 +163,7 @@
                             <label class="font-weight-bold">Profile Picture</label>
                             {{ studentForm.profile_pic }}
                         </div>
-                        <button type="submit" class="btn btn-success btn-block">
+                        <button type="submit" class="btn  btn-block">
                             <i class="fas fa-user-plus mr-2"></i>Add Student
                         </button>
                     </form>
@@ -174,7 +174,7 @@
         <!-- Update Student Card -->
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm h-100">
-                <div class="card-header bg-info text-white">
+                <div class="card-header  text-white">
                     <h4 class="mb-0"><i class="fas fa-user-edit mr-2"></i>Update Student Details</h4>
                 </div>
                 <div class="card-body">
@@ -196,7 +196,7 @@
                                 <option value="CIVIL">Civil</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-info btn-block">
+                        <button type="submit" class="btn btn-block">
                             <i class="fas fa-user-edit mr-2"></i>Update Student
                         </button>
                     </form>
@@ -207,11 +207,11 @@
         <!-- Search Attendance Card -->
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm h-100">
-                <div class="card-header bg-warning text-white">
+                <div class="card-header  text-white">
                     <h4 class="mb-0"><i class="fas fa-search mr-2"></i>Search Attendance</h4>
                 </div>
                 <div class="card-body d-flex align-items-center justify-content-center">
-                    <a href="{% url 'searchattendence' %}" class="btn btn-warning btn-lg">
+                    <a href="{% url 'searchattendence' %}" class="btn  btn-lg">
                         <i class="fas fa-search mr-2"></i>Search Attendance Records
                     </a>
                 </div>
@@ -233,6 +233,7 @@
     .card-header {
         border-bottom: none;
         padding: 1rem;
+        background-color: #003785;
     }
     
     .form-control {
@@ -251,6 +252,8 @@
         padding: 0.5rem 1rem;
         font-weight: 500;
         transition: all 0.3s ease;
+        background-color: #003785;
+        color: white !important;
     }
     
     .btn:hover {
